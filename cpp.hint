@@ -1,0 +1,2 @@
+#define SOFTWAREARCHGHA_API __declspec(dllexport)
+#define SOFTWAREARCHGHA_API __declspec(dllimport)
