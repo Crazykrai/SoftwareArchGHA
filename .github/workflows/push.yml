@@ -21,7 +21,7 @@ env:
   BUILD_CONFIGURATION: Release
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -73,3 +73,39 @@ jobs:
     - name: RunTests
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: VSTest.Console.exe x64\Release\UnitTest1.dll
+  SaveBinary:
+    needs: [test]
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: DownloadBinaries
+      uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+        path: x64\Release
+    
+    - name: stage
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: copy x64\Release\SoftwareArchGHAExe.exe .
+
+    - name: addEmail
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git config --global user.email "ayushverma8@gmail.com"
+
+    - name: addName
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git config --global user.name "Ayush Verma"
+
+    - name: add
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git add SoftwareArchGHAExe.exe
+
+    - name: commit
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git commit -m "generated"
+    
+    - name: push
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git push
