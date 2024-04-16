@@ -141,6 +141,11 @@
   <ItemGroup>
     <ClCompile Include="SoftwareArchGHAExe.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareArchGHA.vcxproj">
+      <Project>{1898bb84-ff24-48e4-83ca-5495f261cd0e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
