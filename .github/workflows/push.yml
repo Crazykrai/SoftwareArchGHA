@@ -42,6 +42,13 @@ jobs:
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+
+    - name: UploadBinaries 
+      uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: x64\Release\
+        if-no-files-found: error
   lint:
     runs-on: windows-latest
 
@@ -54,6 +61,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: RunTest
+    - name: Setup VSTest.exe
+      uses: Malcolmnixon/Setup-VSTest@v4
+
+    - name: DownloadBinaries 
+      uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+        path: x64\Release\
+
+    - name: RunTests
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: echo TEST
+      run: VSTest.Console.exe x64\Release\UnitTest1.dll
