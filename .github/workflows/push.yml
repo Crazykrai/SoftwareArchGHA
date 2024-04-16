@@ -100,7 +100,7 @@ jobs:
 
     - name: add
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: git add SoftwareArchGHAExe.exe
+      run: git add -f SoftwareArchGHAExe.exe
 
     - name: commit
       working-directory: ${{env.GITHUB_WORKSPACE}}
