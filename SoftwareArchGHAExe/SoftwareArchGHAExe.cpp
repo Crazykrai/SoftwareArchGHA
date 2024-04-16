@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Hello World! This line has been updated for the merge request\n";
     std::cout << testMethod(3) << std::endl;
 }
 
