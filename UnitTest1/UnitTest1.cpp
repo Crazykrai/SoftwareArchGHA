@@ -12,6 +12,7 @@ namespace UnitTest1
 
 		TEST_METHOD(TestMethod1)
 		{
+			int test;
 			auto result = testMethod(4);
 
 			Assert::AreEqual(6, result);
